@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CodeWave</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .modal {
+            display: none;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        /* Star rating styles */
+        .stars {
+            display: inline-block;
+            font-size: 1.5rem;
+            color: #ddd;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .stars .star {
+            transition: color 0.2s;
+        }
+
+        .stars .star.selected,
+        .stars .star.hover {
+            color: #f59e0b;
+            /* amber-400 */
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-white via-slate-100 to-blue-100 text-gray-800 font-sans overflow-x-hidden">
+
+
+    <!-- Navbar -->
+    <nav class="bg-white/90 backdrop-blur-lg shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <!-- Logo + Project Name -->
+            <a href="#hero" class="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition">
+                <!-- Simple wave SVG logo -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2 16s4-4 8-4 8 4 8 4v2H2v-2z" />
+                </svg>
+                <span class="text-3xl font-bold select-none">CodeWave</span>
+            </a>
+
+            <ul class="hidden md:flex space-x-6 font-medium">
+                <li><a href="#hero" class="hover:text-blue-500">Home</a></li>
+                <li><a href="#gallery" class="hover:text-blue-500">Gallery</a></li>
+                <li><a href="#review" class="hover:text-blue-500">Reviews</a></li>
+                <li><a href="#contact" class="hover:text-blue-500">Contact</a></li>
+            </ul>
+            <div class="space-x-3">
+                <button onclick="toggleModal('loginModal')"
+                    class="bg-white border border-blue-600 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition">Login</button>
+                <button onclick="toggleModal('signupModal')"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">Sign
+                    Up</button>
+            </div>
+        </div>
+    </nav>
+
+<!-- Hero Section -->
+<section id="hero"
+    class="h-screen relative flex items-center justify-center text-center px-4 text-white transition-all duration-1000">
+    <div id="heroBg" class="absolute inset-0 bg-cover bg-center z-0 transition-all duration-1000" style="background-image: url('your-background-image.jpg');"></div>
+    <div class="z-10 relative bg-black/50 p-8 rounded-xl shadow-lg max-w-3xl">
+        <h2 class="text-5xl font-extrabold drop-shadow-md">Welcome to <span class="text-blue-400">CodeWave</span></h2>
+        <p class="mt-4 text-lg">
+            Unlock the future of tech with <span class="font-semibold text-blue-300">all-in-one coding courses</span>.
+            Learn Web Dev, Ai/ML, DSA, and more — from beginner to pro, all in one place.
+        </p>
+        <a href="#courses"
+            class="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition shadow-md">
+            Explore Courses
+        </a>
+    </div>
+</section>
+
+<script>
+    const backgrounds = [
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi1A3Ib38YrCkcAAUtghg9l6ghDymbKugxy7raV7O9v-X1Gftg7ghmmvoJaDNBYLKyGv0&usqp=CAU',
+        'https://www.shutterstock.com/shutterstock/videos/1111379565/thumb/10.jpg?ip=x480',
+        'https://media.istockphoto.com/id/1356364287/photo/close-up-focus-on-persons-hands-typing-on-the-desktop-computer-backlit-keyboard-screens-show.jpg?b=1&s=612x612&w=0&k=20&c=gmCeQtZj_tBo32I9McGpKy79EyXKLLjAj1DMx9Kfe0k=',
+        'https://static.vecteezy.com/system/resources/thumbnails/049/685/398/small/programmer-working-on-code-at-night-photo.jpg',
+        'https://www.shutterstock.com/image-photo/digital-technology-software-development-concept-600nw-2111828198.jpg'
+    ];
+    let current = 0;
+    const heroBg = document.getElementById('heroBg');
+
+    function changeBackground() {
+        heroBg.style.backgroundImage = `url('${backgrounds[current]}')`;
+        current = (current + 1) % backgrounds.length;
+    }
+
+    changeBackground();
+    setInterval(changeBackground, 3000); // change every 5 seconds
+</script>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-12 bg-white">
+        <h3 class="text-3xl font-bold text-center text-blue-700 mb-8">Image Gallery</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-6">
+            <img src="https://blog.eduonix.com/wp-content/uploads/2018/09/Full-Stack-Developer.jpg" alt="Gallery image 1"
+                class="rounded-lg shadow-lg hover:scale-105 transition" />
+            <img src="https://www.spaceotechnologies.com/wp-content/uploads/2019/08/mobile-app-development-process-2.png" alt="Gallery image 2"
+                class="rounded-lg shadow-lg hover:scale-105 transition" />
+            <img src="https://expertifie.com/wp-content/uploads/2022/07/Data-Structures-Algorithms-using-C-2.jpg" alt="Gallery image 3"
+                class="rounded-lg shadow-lg hover:scale-105 transition" />
+            <img src="https://www.icertglobal.com/images/Java-Optimization.webp" alt="Gallery image 4"
+                class="rounded-lg shadow-lg hover:scale-105 transition" />
+            <img src="https://cadmaxxedtech.com/wp-content/uploads/2024/09/1704439037481-1024x576.jpeg" alt="Gallery image 5"
+                class="rounded-lg shadow-lg hover:scale-105 transition" />
+            <img src="https://images.shiksha.com/mediadata/images/articles/1709545684phpPfnagp.jpeg" alt="Gallery image 6"
+                class="rounded-lg shadow-lg hover:scale-105 transition" />
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="review" class="py-12 bg-gradient-to-r from-indigo-100 to-purple-100">
+        <h3 class="text-3xl font-bold text-center text-blue-700 mb-8">Add Your Review</h3>
+
+        <!-- Live Review Submission Form -->
+        <div class="max-w-3xl mx-auto px-6 mb-8">
+            <!-- <h4 class="text-xl font-semibold text-blue-700 mb-4">Add Your Review</h4> -->
+            <form id="reviewForm" class="space-y-4">
+                <div>
+                    <label class="block mb-1 font-medium">Your Rating:</label>
+                    <div id="starRating" class="stars" aria-label="Star rating" role="radiogroup">
+                        <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="0">&#9733;</span>
+                        <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+                        <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+                        <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+                        <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="-1">&#9733;</span>
+                    </div>
+                </div>
+                <textarea id="reviewText" rows="3" placeholder="Write your review..." required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
+                <button type="submit"
+                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Submit
+                    Review</button>
+            </form>
+        </div>
+
+        <!-- Reviews Container (empty initially) -->
+        <div id="reviewsContainer" class="max-w-5xl mx-auto grid md:grid-cols-3 gap-6 px-6">
+            <!-- Live reviews appear here -->
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+<section id="contact" class="py-12 bg-white text-center">
+    <h3 class="text-3xl font-bold text-blue-700 mb-6">Connect with Me</h3>
+    <p class="mb-6 text-lg">I'm <strong>Alok the Coder</strong>. Let's connect on social media!</p>
+    <div class="flex justify-center space-x-6 text-2xl">
+        <a href="https://github.com/alok856" target="_blank" class="text-gray-700 hover:text-black transition">
+            <i class="fab fa-github"></i> 💻 GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/alok-kumar-785762295" target="_blank" class="text-blue-600 hover:text-blue-800 transition">
+            <i class="fab fa-linkedin"></i> 💼 LinkedIn
+        </a>
+        <a href="https://www.instagram.com/aarav_alok86?igsh=MTBqeGwzOHRvdnkzeQ==" target="_blank" class="text-pink-500 hover:text-pink-700 transition">
+            <i class="fab fa-instagram"></i> 📸 Instagram
+        </a>
+    </div>
+</section>
+
+<!-- Font Awesome CDN -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+<!-- Footer Section -->
+<footer style="text-align: center; padding: 1em; background-color: #222; color: white;">
+  <p>📍 Address: Mandar-Hill, Bounsi, Banka, Bihar, India - 813104</p>
+  <p>© 2025 Alok Kumar. All rights reserved.</p>
+</footer>
+<!-- Login Modal -->
+<div id="loginModal" class="modal fixed inset-0 bg-black bg-opacity-50 justify-center items-center z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-4 text-blue-600">Login</h2>
+    
+    <form action="login.php" method="POST" class="space-y-3">
+      <input name="email" type="email" placeholder="Email"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required />
+
+      <input name="password" id="loginPassword" type="password" placeholder="Password"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required />
+
+      <label class="text-sm text-gray-600 flex items-center">
+        <input type="checkbox" onclick="toggleLoginPassword()" class="mr-2"> Show Password
+      </label>
+
+      <button type="submit"
+        class="bg-blue-600 text-white w-full py-2 rounded-lg hover:bg-blue-700 transition">Login</button>
+
+      <button type="button" onclick="toggleModal('loginModal')"
+        class="w-full py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition">← Back</button>
+    </form>
+  </div>
+</div>
+
+<!-- ✅ JavaScript to toggle login password visibility -->
+<script>
+  function toggleLoginPassword() {
+    const passField = document.getElementById("loginPassword");
+    passField.type = passField.type === "password" ? "text" : "password";
+  }
+</script>
+
+<!-- Signup Modal -->
+<div id="signupModal" class="modal fixed inset-0 bg-black bg-opacity-50 justify-center items-center z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-4 text-blue-600">Sign Up</h2>
+    <form class="space-y-3" action="signup.php" method="POST">
+      
+      <input name="name" type="text" placeholder="Name"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required />
+
+      <input name="email" type="email" placeholder="Email"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required />
+
+      <input name="password" id="password" type="password" placeholder="Password"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required />
+
+      <label class="text-sm text-gray-600 flex items-center">
+        <input type="checkbox" onclick="togglePassword()" class="mr-2"> Show Password
+      </label>
+
+      <input name="mobile" type="tel" placeholder="Mobile Number"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required />
+
+      <textarea name="bio" rows="2" placeholder="Bio"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
+
+      <select name="state"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500" required>
+        <option value="">Select State</option>
+        <option>Andhra Pradesh</option>
+        <option>Arunachal Pradesh</option>
+        <option>Assam</option>
+        <option>Bihar</option>
+        <option>Chhattisgarh</option>
+        <option>Goa</option>
+        <option>Gujarat</option>
+        <option>Haryana</option>
+        <option>Himachal Pradesh</option>
+        <option>Jharkhand</option>
+        <option>Karnataka</option>
+        <option>Kerala</option>
+        <option>Madhya Pradesh</option>
+        <option>Maharashtra</option>
+        <option>Manipur</option>
+        <option>Meghalaya</option>
+        <option>Mizoram</option>
+        <option>Nagaland</option>
+        <option>Odisha</option>
+        <option>Punjab</option>
+        <option>Rajasthan</option>
+        <option>Sikkim</option>
+        <option>Tamil Nadu</option>
+        <option>Telangana</option>
+        <option>Tripura</option>
+        <option>Uttar Pradesh</option>
+        <option>Uttarakhand</option>
+        <option>West Bengal</option>
+        <option>Andaman and Nicobar Islands</option>
+        <option>Chandigarh</option>
+        <option>Dadra and Nagar Haveli and Daman and Diu</option>
+        <option>Delhi</option>
+        <option>Lakshadweep</option>
+        <option>Puducherry</option>
+      </select>
+
+      <button
+        class="bg-blue-600 text-white w-full py-2 rounded-lg hover:bg-blue-700 transition">Sign Up</button>
+
+      <button type="button" onclick="toggleModal('signupModal')"
+        class="w-full py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition">← Back</button>
+    </form>
+  </div>
+</div>
+
+<!-- ✅ Add JS to toggle password -->
+<script>
+  function togglePassword() {
+    const passField = document.getElementById("password");
+    passField.type = passField.type === "password" ? "text" : "password";
+  }
+</script>
+
+    <script>
+        // Modal toggle function
+        function toggleModal(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+
+        // Star rating interactivity
+        const stars = document.querySelectorAll('#starRating .star');
+        let selectedRating = 0;
+
+        stars.forEach((star, i) => {
+            star.addEventListener('mouseover', () => {
+                highlightStars(i + 1);
+            });
+            star.addEventListener('mouseout', () => {
+                highlightStars(selectedRating);
+            });
+            star.addEventListener('click', () => {
+                selectedRating = i + 1;
+                highlightStars(selectedRating);
+            });
+            star.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    selectedRating = i + 1;
+                    highlightStars(selectedRating);
+                }
+            });
+        });
+
+        function highlightStars(count) {
+            stars.forEach((star, i) => {
+                if (i < count) {
+                    star.classList.add('selected');
+                    star.setAttribute('aria-checked', 'true');
+                    star.setAttribute('tabindex', '0');
+                } else {
+                    star.classList.remove('selected');
+                    star.setAttribute('aria-checked', 'false');
+                    star.setAttribute('tabindex', '-1');
+                }
+            });
+        }
+
+        // Handle review form submission
+        document.getElementById('reviewForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const rating = selectedRating;
+            const reviewText = document.getElementById('reviewText').value.trim();
+            if (rating === 0) {
+                alert('Please select a rating.');
+                return;
+            }
+            if (!reviewText) {
+                alert('Please write a review.');
+                return;
+            }
+            addReview(rating, reviewText);
+            // Reset form
+            selectedRating = 0;
+            highlightStars(0);
+            this.reset();
+        });
+
+        function addReview(rating, text) {
+            const container = document.getElementById('reviewsContainer');
+            const reviewDiv = document.createElement('div');
+            reviewDiv.className = 'bg-white p-6 rounded-lg shadow-md';
+            // Stars display
+            let starsHtml = '';
+            for (let i = 0; i < 5; i++) {
+                starsHtml += i < rating ? '<span class="text-amber-400 text-xl">&#9733;</span>' : '<span class="text-gray-300 text-xl">&#9733;</span>';
+            }
+            reviewDiv.innerHTML = `
+      <div class="mb-2">${starsHtml}</div>
+      <p class="text-gray-700">${text}</p>
+    `;
+            container.prepend(reviewDiv);
+        }
+    </script>
+
+</body>
+
+</html>
